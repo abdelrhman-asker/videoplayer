@@ -1,0 +1,306 @@
+[
+    {
+      "week": 1,
+      "videos": [
+        {
+          "id": "0",
+          "type": "pdf",
+          "title": "React Documentation",
+          "description": "Official React documentation PDF.",
+          "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          "thumbnailUrl": "https://www.adobe.com/content/dam/acom/one-console/images_2880/adobe_pdf_icon_1200x630.jpg"
+        },
+        {
+          "id": "1",
+          "type": "video",
+          "title": "Big Buck Bunny",
+          "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/1200px-Big_Buck_Bunny_thumbnail_vlc.png",
+          "duration": "8:18",
+          "uploadTime": "May 9, 2011",
+          "views": "24,969,123",
+          "author": "Vlc Media Player",
+          "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.",
+          "subscriber": "25254545 Subscribers",
+          "isLive": true
+        },
+        {
+          "id": "2",
+          "type": "video",
+          "title": "React Tutorial for Beginners",
+          "thumbnailUrl": "https://i.ytimg.com/vi/Ke90Tje7VS0/maxresdefault.jpg",
+          "duration": "10:00",
+          "uploadTime": "Mar 1, 2020",
+          "views": "5,123,456",
+          "author": "Programming with Mosh",
+          "videoUrl": "https://www.youtube.com/watch?v=Ke90Tje7VS0",
+          "description": "Learn React from scratch with this beginner-friendly tutorial.",
+          "subscriber": "1M Subscribers",
+          "isLive": false
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "videos": [
+        {
+          "id": "3",
+          "type": "exam",
+          "title": "React Basics Exam",
+          "description": "Test your knowledge of React basics.",
+          "duration": "10:00",
+          "questions": [
+            {
+              "id": 1,
+              "text": "What is a React component?",
+              "options": ["A function or class that returns JSX", "A CSS style", "A database query", "A server endpoint"],
+              "correctAnswer": "A function or class that returns JSX"
+            },
+            {
+              "id": 2,
+              "text": "What hook manages state in functional components?",
+              "options": ["useEffect", "useState", "useRef", "useContext"],
+              "correctAnswer": "useState"
+            },
+            {
+              "id": 3,
+              "text": "What does JSX stand for?",
+              "options": ["JavaScript XML", "Java Syntax Extension", "JSON XML", "JavaScript Extension"],
+              "correctAnswer": "JavaScript XML"
+            },
+            {
+              "id": 4,
+              "text": "How do you pass data to a component?",
+              "options": ["Using props", "Using state", "Using hooks", "Using context"],
+              "correctAnswer": "Using props"
+            },
+            {
+              "id": 5,
+              "text": "What is the virtual DOM?",
+              "options": ["A lightweight copy of the actual DOM", "A database", "A CSS framework", "A server-side rendering tool"],
+              "correctAnswer": "A lightweight copy of the actual DOM"
+            },
+            {
+              "id": 6,
+              "text": "Which method triggers a re-render in a class component?",
+              "options": ["setState", "render", "componentDidMount", "forceUpdate"],
+              "correctAnswer": "setState"
+            },
+            {
+              "id": 7,
+              "text": "What is the purpose of useEffect?",
+              "options": ["Handle side effects", "Manage state", "Optimize rendering", "Access DOM"],
+              "correctAnswer": "Handle side effects"
+            },
+            {
+              "id": 8,
+              "text": "What is a controlled component?",
+              "options": ["A component whose form data is handled by React", "A component with no state", "A component using hooks", "A component with CSS"],
+              "correctAnswer": "A component whose form data is handled by React"
+            },
+            {
+              "id": 9,
+              "text": "What does the key prop do in a list?",
+              "options": ["Helps React identify items efficiently", "Styles the list", "Triggers animations", "Handles events"],
+              "correctAnswer": "Helps React identify items efficiently"
+            },
+            {
+              "id": 10,
+              "text": "What is React's one-way data flow?",
+              "options": ["Data flows from parent to child", "Data flows in both directions", "Data is stored in a database", "Data is immutable"],
+              "correctAnswer": "Data flows from parent to child"
+            },
+            {
+              "id": 11,
+              "text": "What is the purpose of useRef?",
+              "options": ["Persist values across renders", "Manage state", "Handle side effects", "Optimize performance"],
+              "correctAnswer": "Persist values across renders"
+            },
+            {
+              "id": 12,
+              "text": "What is a higher-order component?",
+              "options": ["A function that takes a component and returns a new component", "A component with state", "A component using hooks", "A component with props"],
+              "correctAnswer": "A function that takes a component and returns a new component"
+            },
+            {
+              "id": 13,
+              "text": "What does create-react-app do?",
+              "options": ["Sets up a React project with a build configuration", "Deploys a React app", "Tests a React app", "Styles a React app"],
+              "correctAnswer": "Sets up a React project with a build configuration"
+            },
+            {
+              "id": 14,
+              "text": "What is the default export in a React component file?",
+              "options": ["The main component", "A utility function", "A CSS file", "A configuration object"],
+              "correctAnswer": "The main component"
+            },
+            {
+              "id": 15,
+              "text": "What is the purpose of React.Fragment?",
+              "options": ["Group elements without adding extra nodes", "Manage state", "Handle events", "Optimize rendering"],
+              "correctAnswer": "Group elements without adding extra nodes"
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "type": "video",
+          "title": "React Hooks Tutorial",
+          "thumbnailUrl": "https://i.ytimg.com/vi/TNhaISOUy6Q/maxresdefault.jpg",
+          "duration": "15:00",
+          "uploadTime": "Apr 10, 2021",
+          "views": "3,456,789",
+          "author": "Codevolution",
+          "videoUrl": "https://www.youtube.com/watch?v=TNhaISOUy6Q",
+          "description": "Master React Hooks with this comprehensive tutorial.",
+          "subscriber": "500K Subscribers",
+          "isLive": false
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "videos": [
+        {
+          "id": "5",
+          "type": "pdf",
+          "title": "React Documentation",
+          "description": "Official React documentation PDF.",
+          "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          "thumbnailUrl": "https://www.adobe.com/content/dam/acom/one-console/images_2880/adobe_pdf_icon_1200x630.jpg"
+        },
+        {
+          "id": "6",
+          "type": "video",
+          "title": "For Bigger Escape",
+          "thumbnailUrl": "https://img.jakpost.net/c/2019/09/03/2019_09_03_78912_1567484272._large.jpg",
+          "duration": "8:18",
+          "uploadTime": "May 9, 2011",
+          "views": "24,969,123",
+          "author": "T-Series Regional",
+          "videoUrl": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+          "description": "Introducing Chromecast for bigger escapes.",
+          "subscriber": "25254545 Subscribers",
+          "isLive": false
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "videos": [
+        {
+          "id": "7",
+          "type": "video",
+          "title": "Advanced React Patterns",
+          "thumbnailUrl": "https://i.ytimg.com/vi/4UZrsTqkcW4/maxresdefault.jpg",
+          "duration": "20:00",
+          "uploadTime": "Jun 15, 2022",
+          "views": "2,789,123",
+          "author": "Kent C. Dodds",
+          "videoUrl": "https://www.youtube.com/watch?v=4UZrsTqkcW4",
+          "description": "Learn advanced React patterns to build scalable applications.",
+          "subscriber": "300K Subscribers",
+          "isLive": false
+        },
+        {
+          "id": "8",
+          "type": "exam",
+          "title": "Advanced React Exam",
+          "description": "Test your knowledge of advanced React concepts.",
+          "duration": "10:00",
+          "questions": [
+            {
+              "id": 1,
+              "text": "What is the purpose of useMemo?",
+              "options": ["Manage state", "Optimize performance", "Handle side effects", "Access DOM"],
+              "correctAnswer": "Optimize performance"
+            },
+            {
+              "id": 2,
+              "text": "What does React Context provide?",
+              "options": ["State management", "Component styling", "Routing", "Data fetching"],
+              "correctAnswer": "State management"
+            },
+            {
+              "id": 3,
+              "text": "What is a render prop?",
+              "options": ["A function prop that a component uses to render content", "A CSS property", "A state management tool", "A hook"],
+              "correctAnswer": "A function prop that a component uses to render content"
+            },
+            {
+              "id": 4,
+              "text": "What does useCallback do?",
+              "options": ["Memoizes a function to prevent re-creation", "Manages state", "Handles side effects", "Accesses DOM"],
+              "correctAnswer": "Memoizes a function to prevent re-creation"
+            },
+            {
+              "id": 5,
+              "text": "What is lazy loading in React?",
+              "options": ["Loading components only when needed", "Preloading all components", "Optimizing images", "Caching data"],
+              "correctAnswer": "Loading components only when needed"
+            },
+            {
+              "id": 6,
+              "text": "What is the purpose of React Suspense?",
+              "options": ["Handle asynchronous rendering", "Manage state", "Optimize performance", "Style components"],
+              "correctAnswer": "Handle asynchronous rendering"
+            },
+            {
+              "id": 7,
+              "text": "What is a custom hook?",
+              "options": ["A reusable function that uses React hooks", "A component with state", "A CSS utility", "A routing function"],
+              "correctAnswer": "A reusable function that uses React hooks"
+            },
+            {
+              "id": 8,
+              "text": "What does the useReducer hook do?",
+              "options": ["Manages complex state logic", "Handles side effects", "Optimizes rendering", "Accesses DOM"],
+              "correctAnswer": "Manages complex state logic"
+            },
+            {
+              "id": 9,
+              "text": "What is code splitting?",
+              "options": ["Splitting code into smaller bundles", "Combining all code into one file", "Minifying code", "Encrypting code"],
+              "correctAnswer": "Splitting code into smaller bundles"
+            },
+            {
+              "id": 10,
+              "text": "What is the purpose of React.PureComponent?",
+              "options": ["Prevents unnecessary re-renders", "Manages state", "Handles events", "Optimizes CSS"],
+              "correctAnswer": "Prevents unnecessary re-renders"
+            },
+            {
+              "id": 11,
+              "text": "What is the significance of the dependency array in useEffect?",
+              "options": ["Controls when the effect runs", "Manage state", "Handles props", "Optimize rendering"],
+              "correctAnswer": "Controls when the effect runs"
+            },
+            {
+              "id": 12,
+              "text": "What is server-side rendering?",
+              "options": ["Rendering React components on the server", "Rendering on the client", "Optimizing images", "Caching data"],
+              "correctAnswer": "Rendering React components on the server"
+            },
+            {
+              "id": 13,
+              "text": "What is the purpose of React Router?",
+              "options": ["Client-side routing", "State management", "Data fetching", "Component styling"],
+              "correctAnswer": "Client-side routing"
+            },
+            {
+              "id": 14,
+              "text": "What is the role of the Provider in React Context?",
+              "options": ["Shares data with consumers", "Manages state", "Handles events", "Optimizes rendering"],
+              "correctAnswer": "Shares data with consumers"
+            },
+            {
+              "id": 15,
+              "text": "What is the purpose of React.memo?",
+              "options": ["Prevents unnecessary re-renders of functional components", "Manages state", "Handles side effects", "Accesses DOM"],
+              "correctAnswer": "Prevents unnecessary re-renders of functional components"
+            }
+          ]
+        }
+      ]
+    }
+]
