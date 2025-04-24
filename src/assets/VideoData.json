@@ -2,14 +2,7 @@
     {
       "week": 1,
       "videos": [
-        {
-          "id": "0",
-          "type": "pdf",
-          "title": "React Documentation",
-          "description": "Official React documentation PDF.",
-          "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-          "thumbnailUrl": "https://www.adobe.com/content/dam/acom/one-console/images_2880/adobe_pdf_icon_1200x630.jpg"
-        },
+       
         {
           "id": "1",
           "type": "video",
@@ -23,6 +16,14 @@
           "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.",
           "subscriber": "25254545 Subscribers",
           "isLive": true
+        },
+        {
+          "id": "1",
+          "type": "pdf",
+          "title": "React Documentation",
+          "description": "Official React documentation PDF.",
+          "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          "thumbnailUrl": "https://www.adobe.com/content/dam/acom/one-console/images_2880/adobe_pdf_icon_1200x630.jpg"
         },
         {
           "id": "2",
