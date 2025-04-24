@@ -130,11 +130,11 @@ const VideoPlayer = () => {
   };
 
   const scrollToCurriculum = () => {
+    setExpandAllTrigger((prev) => prev + 1);
     const videoElement = document.getElementById(`video-${currentContent.id}`);
     if (videoElement) {
       videoElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    setExpandAllTrigger((prev) => prev + 1);
   };
 
   const handleAddComment = (e) => {
@@ -334,7 +334,7 @@ const VideoPlayer = () => {
               <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
                 {Object.entries(videoData.courseInfo.primary).map(([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span className='font-light'>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
                     <span>{value}</span>
                   </div>
                 ))}
@@ -342,8 +342,8 @@ const VideoPlayer = () => {
               <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
                 {Object.entries(videoData.courseInfo.secondary).map(([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
-                    <span>{value}</span>
+                    <span className='font-light'>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span className='font-light'>{value}</span>
                   </div>
                 ))}
               </div>
@@ -370,7 +370,7 @@ const VideoPlayer = () => {
               <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
                 {Object.entries(videoData.courseInfo.primary).map(([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span className='font-light'>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
                     <span>{value}</span>
                   </div>
                 ))}
@@ -378,7 +378,7 @@ const VideoPlayer = () => {
               <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
                 {Object.entries(videoData.courseInfo.secondary).map(([key, value]) => (
                   <div key={key} className="flex justify-between">
-                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span className='font-light'>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
                     <span>{value}</span>
                   </div>
                 ))}
