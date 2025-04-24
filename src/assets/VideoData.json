@@ -1,10 +1,24 @@
-[
+{
+  "courseInfo": {
+    "primary": {
+      "duration": "3 weeks",
+      "lessons": 8,
+      "enrolled": "70 students",
+      "language": "English"
+    },
+    "secondary": {
+      "skillLevel": "Beginners",
+      "framework": "React",
+      "instructor": "Ali Shahin",
+      "certificate": "Available"
+    }
+  },
+  "weeks": [
     {
       "week": 1,
       "videos": [
-       
         {
-          "id": "1",
+          "id": "0",
           "type": "video",
           "title": "Big Buck Bunny",
           "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Big_Buck_Bunny_thumbnail_vlc.png/1200px-Big_Buck_Bunny_thumbnail_vlc.png",
@@ -304,4 +318,5 @@
         }
       ]
     }
-]
+  ]
+}

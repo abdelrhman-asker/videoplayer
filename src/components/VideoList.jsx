@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 
-const VideoList = ({ videoData, currentContent, watchedVideos, onSelectContent, isContentUnlocked, videoListRef }) => {
+const VideoList = ({ videoData, currentContent, watchedVideos, onSelectContent, isContentUnlocked, videoListRef, expandAllWeeks }) => {
   const [expandedWeeks, setExpandedWeeks] = useState(() => {
-    // Find the week containing the currentContent
     const currentWeek = videoData.find(week =>
       week.videos.some(video => video.id === currentContent.id)
     );
-    // Initialize with the current week expanded
     return currentWeek ? { [currentWeek.week]: true } : {};
   });
 
   useEffect(() => {
-    // Ensure the current week is expanded when currentContent changes
     const currentWeek = videoData.find(week =>
       week.videos.some(video => video.id === currentContent.id)
     );
@@ -23,11 +20,37 @@ const VideoList = ({ videoData, currentContent, watchedVideos, onSelectContent, 
     }
   }, [currentContent, videoData]);
 
+  useEffect(() => {
+    if (expandAllWeeks) {
+      const allWeeksExpanded = videoData.reduce((acc, week) => ({
+        ...acc,
+        [week.week]: true,
+      }), {});
+      setExpandedWeeks(allWeeksExpanded);
+    }
+  }, [expandAllWeeks, videoData]);
+
   const toggleWeek = (weekNumber) => {
     setExpandedWeeks((prev) => ({
       ...prev,
       [weekNumber]: !prev[weekNumber],
     }));
+  };
+
+  const expandAll = () => {
+    const allWeeksExpanded = videoData.reduce((acc, week) => ({
+      ...acc,
+      [week.week]: true,
+    }), {});
+    setExpandedWeeks(allWeeksExpanded);
+  };
+
+  const collapseAll = () => {
+    setExpandedWeeks({});
+  };
+
+  const areAllWeeksExpanded = () => {
+    return videoData.every(week => expandedWeeks[week.week]);
   };
 
   const calculateProgress = () => {
@@ -38,7 +61,15 @@ const VideoList = ({ videoData, currentContent, watchedVideos, onSelectContent, 
 
   return (
     <div className="bg-white rounded-lg shadow p-4" ref={videoListRef}>
-      <h2 className="text-lg font-semibold mb-12">Topics For This Course</h2>
+      <h2 className="text-md font-semibold mb-12 flex justify-between">
+        Topics For This Course
+        <span
+          onClick={areAllWeeksExpanded() ? collapseAll : expandAll}
+          className="cursor-pointer text-blue-600 hover:text-blue-800"
+        >
+          {areAllWeeksExpanded() ? 'Collapse All 🔺' : 'Expand All 🔻'}
+        </span>
+      </h2>
       <div className="mb-4">
         <div className="w-full bg-gray-200 rounded-full h-2.5">
           <div

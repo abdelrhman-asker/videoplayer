@@ -9,7 +9,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 const VideoPlayer = () => {
   const isContentUnlocked = (content, watched) => {
-    const allContent = videoData.flatMap(week => week.videos);
+    const allContent = videoData.weeks.flatMap(week => week.videos);
     const currentIndex = allContent.findIndex(v => v.id === content.id);
     if (currentIndex === 0) return true;
     for (let i = 0; i < currentIndex; i++) {
@@ -20,7 +20,7 @@ const VideoPlayer = () => {
 
   const [currentContent, setCurrentContent] = useState(() => {
     const watchedVideos = JSON.parse(localStorage.getItem('watchedVideos') || '{}');
-    const allContent = videoData.flatMap(week => week.videos);
+    const allContent = videoData.weeks.flatMap(week => week.videos);
     const firstUnwatched = allContent.find(item => !watchedVideos[item.id] && isContentUnlocked(item, watchedVideos));
     return firstUnwatched || allContent[0];
   });
@@ -48,9 +48,12 @@ const VideoPlayer = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [showLeaderboardPopup, setShowLeaderboardPopup] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [expandAllTrigger, setExpandAllTrigger] = useState(0);
   const playerRef = useRef(null);
   const commentsRef = useRef(null);
   const videoListRef = useRef(null);
+  const videoContainerRef = useRef(null);
 
   const courseName = "React Tutorial for Beginners";
 
@@ -107,13 +110,8 @@ const VideoPlayer = () => {
       if (content.type === 'video' && playerRef.current) {
         playerRef.current.seekTo(0);
       }
+      setIsPlaying(false);
     }
-  };
-
-  const calculateProgress = () => {
-    const allContent = videoData.flatMap(week => week.videos);
-    const completed = allContent.filter(item => watchedVideos[item.id]).length;
-    return (completed / allContent.length) * 100;
   };
 
   const handleExamComplete = (examId, answers) => {
@@ -136,6 +134,7 @@ const VideoPlayer = () => {
     if (videoElement) {
       videoElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    setExpandAllTrigger((prev) => prev + 1);
   };
 
   const handleAddComment = (e) => {
@@ -160,57 +159,79 @@ const VideoPlayer = () => {
     }
   };
 
+  const courseInfoIcons = {
+    duration: '⌚',
+    lessons: '📖',
+    enrolled: '🧑‍💻',
+    language: '🌍',
+    skillLevel: '📊',
+    framework: '⚛️',
+    instructor: '👨‍🏫',
+    certificate: '🏆'
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4"> <span className='text-lg font-light'> Home &gt; </span> <span className='text-lg font-light'> Courses &gt; </span> Course Details</h1>
+      <h1 className="text-2xl font-bold mb-4">
+        <span className="text-lg font-light"> Home &gt; </span>
+        <span className="text-lg font-light"> Courses &gt; </span> Course Details
+      </h1>
 
       <div className="flex flex-col md:flex-row gap-4">
         <div className="w-full md:w-2/3">
           <h2 className="text-3xl font-semibold my-2 mb-6">{currentContent.title}</h2>
 
-          {currentContent.type === 'video' && (
-            <div className="aspect-video bg-black rounded-lg overflow-hidden">
+          <div
+            ref={videoContainerRef}
+            className={`aspect-video bg-black rounded-lg overflow-hidden ${
+              currentContent.type === 'video' && isPlaying ? 'sticky top-4 z-40' : ''
+            }`}
+          >
+            {currentContent.type === 'video' && (
               <ReactPlayer
                 ref={playerRef}
                 url={currentContent.videoUrl}
                 width="100%"
                 height="100%"
                 controls
-                light={<img src={currentContent.thumbnailUrl} alt='Thumbnail' />}
+                light={<img src={currentContent.thumbnailUrl} alt="Thumbnail" />}
                 onProgress={handleVideoProgress}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
               />
-            </div>
-          )}
-          {currentContent.type === 'exam' && (
-            <ExamComponent
-              exam={currentContent}
-              savedProgress={examProgress[currentContent.id]}
-              onComplete={handleExamComplete}
-            />
-          )}
-          {currentContent.type === 'pdf' && showPdf && (
-            <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-              <div className="bg-white p-4 rounded-lg max-w-4xl w-full h-[90%] flex flex-col overflow-hidden">
-                <div className="flex justify-between items-center mb-2">
-                  <h2 className="text-lg font-semibold">{currentContent.title}</h2>
-                  <button
-                    onClick={() => setShowPdf(false)}
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                  >
-                    Close
-                  </button>
-                </div>
-                <div className="flex-1 overflow-hidden">
-                  <iframe
-                    src={`https://docs.google.com/gview?url=${currentContent.pdfUrl}&embedded=true`}
-                    title={currentContent.title}
-                    className="w-full h-full border-0"
-                  />
+            )}
+            {currentContent.type === 'exam' && (
+              <ExamComponent
+                exam={currentContent}
+                savedProgress={examProgress[currentContent.id]}
+                onComplete={handleExamComplete}
+              />
+            )}
+            {currentContent.type === 'pdf' && showPdf && (
+              <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+                <div className="bg-white p-4 rounded-lg max-w-4xl w-full h-[90%] flex flex-col overflow-hidden">
+                  <div className="flex justify-between items-center mb-2">
+                    <h2 className="text-lg font-semibold">{currentContent.title}</h2>
+                    <button
+                      onClick={() => setShowPdf(false)}
+                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <div className="flex-1 overflow-hidden">
+                    <iframe
+                      src={`https://docs.google.com/gview?url=${currentContent.pdfUrl}&embedded=true`}
+                      title={currentContent.title}
+                      className="w-full h-full border-0"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-          {/* Icons below the Video */}
+            )}
+          </div>
+
           <div className="flex gap-4 mt-4">
             <div className="flex flex-col gap-1">
               <button
@@ -235,9 +256,8 @@ const VideoPlayer = () => {
               </button>
               <span className="text-xs">comments</span>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 cursor-pointer" onClick={scrollToCurriculum}>
               <button
-                onClick={scrollToCurriculum}
                 className="p-2 bg-green-500 text-white rounded hover:bg-green-600 flex justify-center"
                 title="Curriculum"
               >
@@ -307,16 +327,63 @@ const VideoPlayer = () => {
           </div>
           <p className="text-gray-600 mt-4">{currentContent.description}</p>
 
+          {/* Course Materials in mobile */}
+          <div className="block md:hidden mt-8 text-lg font-semibold">
+            Course Materials
+            <div className="p-4 shadow-md rounded mt-2 flex justify-between flex-wrap gap-y-8">
+              <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
+                {Object.entries(videoData.courseInfo.primary).map(([key, value]) => (
+                  <div key={key} className="flex justify-between">
+                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
+                {Object.entries(videoData.courseInfo.secondary).map(([key, value]) => (
+                  <div key={key} className="flex justify-between">
+                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {/* VideoList (Topics For This Course) - Rendered here for mobile order */}
           <div className="w-full mt-8 md:hidden">
             <VideoList
-              videoData={videoData}
+              videoData={videoData.weeks}
               currentContent={currentContent}
               watchedVideos={watchedVideos}
               onSelectContent={selectContent}
               isContentUnlocked={(content) => isContentUnlocked(content, watchedVideos)}
               videoListRef={videoListRef}
+              expandAllWeeks={expandAllTrigger}
             />
+          </div>
+
+          {/* Course Materials in Desktop */}
+          <div className="hidden md:block mt-8 text-lg font-semibold">
+            Course Materials
+            <div className="p-4 shadow-md rounded mt-2 flex justify-between">
+              <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
+                {Object.entries(videoData.courseInfo.primary).map(([key, value]) => (
+                  <div key={key} className="flex justify-between">
+                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="w-1/3 min-w-fit max-w-1/2 flex flex-col gap-2">
+                {Object.entries(videoData.courseInfo.secondary).map(([key, value]) => (
+                  <div key={key} className="flex justify-between">
+                    <span>{courseInfoIcons[key]} {key.charAt(0).toUpperCase() + key.slice(1)} :</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Comments Section */}
@@ -350,20 +417,19 @@ const VideoPlayer = () => {
           </div>
         </div>
 
-        {/* VideoList (Topics For This Course) - Rendered here for desktop */}
         <div className="w-full md:w-1/3 hidden md:block">
           <VideoList
-            videoData={videoData}
+            videoData={videoData.weeks}
             currentContent={currentContent}
             watchedVideos={watchedVideos}
             onSelectContent={selectContent}
             isContentUnlocked={(content) => isContentUnlocked(content, watchedVideos)}
             videoListRef={videoListRef}
+            expandAllWeeks={expandAllTrigger}
           />
         </div>
       </div>
 
-      {/* Question Popup */}
       {showQuestionPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg max-w-md w-full">
@@ -424,10 +490,11 @@ const VideoPlayer = () => {
         </div>
       )}
 
-      {/* Leaderboard Popup */}
       {showLeaderboardPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-md w-full">
+          <div className="bg-white p-6 rounded-lg max-w-md w-full h-2/3 flex flex-col justify-between">
+           
+            <div> 
             <div className="flex justify-between items-center mb-4">
               <button
                 onClick={() => setShowLeaderboardPopup(false)}
@@ -451,11 +518,12 @@ const VideoPlayer = () => {
             </div>
             <h3 className="text-xl font-bold">{courseName}</h3>
             <h4 className="text-lg font-semibold mt-2">Leaderboard</h4>
-            <div className="flex items-center">
-              <p className="mt-4 text-gray-600">
+            <div className="flex items-center bg-gray-100 mt-4" >
+              <p className="my-4 p-2 text-right text-gray-600 ">
                 عظيم يا صديقي.. أداءك في الكورس ده أفضل من 60% من باقي الطلبة.. كمّل عايز أشوف اسمك في الليدر بورد هنا
               </p>
               <div className="text-4xl">💪</div>
+            </div>
             </div>
             <div className="flex justify-end mt-4">
               <button
